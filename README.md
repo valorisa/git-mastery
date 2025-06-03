@@ -13,6 +13,7 @@ Avant de commencer, assurez-vous que Git est installé :
 ```bash
 git --version
 ```
+
 Si ce n'est pas le cas, installez-le via [git-scm.com](https://git-scm.com/downloads).
 
 ### Configuration de votre identité Git
@@ -23,6 +24,7 @@ Il est indispensable de configurer votre nom et votre adresse email, car ils ser
 git config --global user.name "Your_Name"
 git config --global user.email "your.email@example.com"
 ```
+
 > **Astuce** : Utilisez `--global` pour appliquer la configuration à tous vos dépôts, ou sans `--global` pour ne la définir que dans le projet courant.
 
 ### Création de votre projet d'entraînement
@@ -34,6 +36,7 @@ mkdir git-mastery-training
 cd git-mastery-training
 git init
 ```
+
 Votre "bac à sable" Git est prêt !
 
 ---
@@ -43,15 +46,20 @@ Votre "bac à sable" Git est prêt !
 ### Création et suivi de fichiers
 
 1. Créez quelques fichiers (par exemple, `README.md`, `script.py`, `notes.txt`) :
+
     ```bash
     touch README.md script.py notes.txt
     ```
+
 2. Ajoutez-les à la zone de préparation (index) :
+
     ```bash
     git add README.md script.py notes.txt
     # Ou pour tous les fichiers : git add .
     ```
+
 3. Effectuez votre premier commit :
+
     ```bash
     git commit -m "Premier commit : ajout des fichiers initiaux"
     ```
@@ -62,14 +70,19 @@ Votre "bac à sable" Git est prêt !
 
 1. Modifiez un fichier (par exemple, `script.py`) avec votre éditeur préféré.
 2. Vérifiez l’état du dépôt :
+
     ```bash
     git status
     ```
+
 3. Visualisez les modifications apportées :
+
     ```bash
     git diff
     ```
+
 4. Ajoutez et commitez les changements :
+
     ```bash
     git add script.py
     git commit -m "Modifie script.py : ajout d'une fonction"
@@ -84,34 +97,43 @@ Les branches permettent de travailler sur des fonctionnalités ou corrections sa
 ### Création et navigation
 
 1. Créez une nouvelle branche :
+
     ```bash
     git branch feature-nouvelle-fonctionnalite
     ```
+
 2. Basculez dessus :
+
     ```bash
     git checkout feature-nouvelle-fonctionnalite
     # Ou, plus moderne :
     git switch feature-nouvelle-fonctionnalite
     ```
+
     > **Astuce** : Créez et basculez en une seule commande :
-    > ```bash
-    > git checkout -b feature-nouvelle-fonctionnalite
-    > # ou
-    > git switch -c feature-nouvelle-fonctionnalite
-    > ```
+
+    ```bash
+    git checkout -b feature-nouvelle-fonctionnalite
+    # ou
+    git switch -c feature-nouvelle-fonctionnalite
+    ```
 
 ### Fusion de branches (merge)
 
 1. Faites des commits sur votre branche de fonctionnalité.
 2. Revenez sur la branche principale :
+
     ```bash
     git checkout main
     # ou git switch main
     ```
+
 3. Fusionnez la branche :
+
     ```bash
     git merge feature-nouvelle-fonctionnalite
     ```
+
     > **Conseil** : Résolvez les conflits de fusion si besoin, puis validez la fusion.
 
 ### Réécriture de l’historique (rebase)
@@ -119,14 +141,17 @@ Les branches permettent de travailler sur des fonctionnalités ou corrections sa
 Le rebase permet de "rejouer" vos commits sur une base plus récente, gardant un historique linéaire.
 
 - **Rebaser votre branche de fonctionnalité sur la branche principale (le plus courant)** :
+
     ```bash
     git checkout feature-nouvelle-fonctionnalite
     git fetch origin # Pour récupérer les dernières mises à jour distantes
     git rebase main  # ou git rebase origin/main si vous suivez la version distante
     ```
+
     > **Attention** : Ne faites pas de rebase sur des branches déjà partagées avec d'autres, car cela réécrit l’historique !
 
 - **Rebaser la branche principale sur votre branche de fonctionnalité** (rare, mais illustratif) :
+
     ```bash
     git checkout main
     git rebase feature-nouvelle-fonctionnalite
@@ -144,18 +169,23 @@ Le rebase permet de "rejouer" vos commits sur une base plus récente, gardant un
 ### Connecter un dépôt local à un dépôt distant
 
 Créez un dépôt distant (ex : GitHub) et copiez son URL :
+
 ```bash
 git remote add origin https://github.com/votre-utilisateur/git-mastery-training.git
 ```
+
 > **Conseil** : Utilisez `git remote -v` pour vérifier la configuration.
 
 ### Envoyer vos modifications
 
 - Premier push (avec suivi de branche) :
+
     ```bash
     git push -u origin main
     ```
+
 - Pushs suivants :
+
     ```bash
     git push
     ```
@@ -167,6 +197,7 @@ git pull origin main
 # ou simplement
 git pull
 ```
+
 > **Explication** : `git pull` = `git fetch` + `git merge` (ou `git rebase` selon la config).
 
 ### Cloner un dépôt existant
@@ -182,6 +213,7 @@ git clone https://github.com/votre-utilisateur/git-mastery-training.git
 ### Mise de côté temporaire (stash)
 
 Pour sauvegarder des modifications non commitées :
+
 ```bash
 git stash push -m "Travail en cours sur la fonctionnalité Y"
 git stash list
@@ -189,16 +221,20 @@ git stash pop  # Applique et retire le dernier stash
 # git stash apply # Applique sans retirer
 # git stash drop # Supprime un stash spécifique
 ```
+
 > **Astuce** : Utilisez le stash pour changer rapidement de branche sans perdre votre travail en cours.
 
 ### Suppression de fichiers
 
 - **Supprimer un fichier suivi par Git et du système de fichiers** :
+
     ```bash
     git rm notes.txt
     git commit -m "Supprime notes.txt"
     ```
+
 - **Supprimer des fichiers non suivis (dangereux)** :
+
     ```bash
     git clean -n   # Simulation
     git clean -f   # Suppression effective
@@ -209,7 +245,8 @@ git stash pop  # Applique et retire le dernier stash
 
 1. Créez un fichier `.gitignore` à la racine.
 2. Ajoutez-y les motifs à ignorer :
-    ```
+
+    ```text
     # Fichiers Python compilés
     __pycache__/
     *.pyc
@@ -220,7 +257,9 @@ git stash pop  # Applique et retire le dernier stash
     # Fichiers de log
     *.log
     ```
+
 3. Ajoutez et commitez le `.gitignore` :
+
     ```bash
     git add .gitignore
     git commit -m "Ajoute .gitignore"
@@ -240,19 +279,25 @@ git log
 git log --oneline
 git log --graph --oneline --all --decorate
 ```
+
 > **Astuce** : Utilisez `q` pour quitter la vue log.
 
 ### Revenir à un état antérieur
 
 - **Annuler le dernier commit et supprimer les modifications du répertoire de travail** :
+
     ```bash
     git reset --hard HEAD~1
     ```
+
 - **Annuler le dernier commit mais garder les modifications en staging** :
+
     ```bash
     git reset --soft HEAD~1
     ```
+
 - **Annuler le dernier commit mais garder les modifications dans le répertoire de travail** :
+
     ```bash
     git reset --mixed HEAD~1
     ```
@@ -262,12 +307,15 @@ git log --graph --oneline --all --decorate
 ### Annuler des modifications non commitées
 
 - **Restaurer un fichier à sa version du dernier commit** :
+
     ```bash
     git restore nom_du_fichier.txt
     # Ancienne méthode :
     git checkout -- nom_du_fichier.txt
     ```
+
 - **Retirer un fichier de la zone de préparation (index)** :
+
     ```bash
     git restore --staged nom_du_fichier.txt
     # Ancienne méthode :
@@ -277,14 +325,17 @@ git log --graph --oneline --all --decorate
 ### Annuler un commit publié (méthode sûre)
 
 Pour annuler un commit déjà poussé :
+
 ```bash
 git revert 
 ```
+
 > **Explication** : `git revert` crée un nouveau commit qui annule les changements, sans réécrire l’historique partagé.
 
 ### Récupérer des commits perdus
 
 Utilisez le reflog pour retrouver des commits supprimés par erreur :
+
 ```bash
 git reflog
 # Puis, pour revenir à un état précédent :
@@ -361,6 +412,7 @@ git config --global alias.st "status"
 git config --global alias.co "checkout"
 git config --global alias.br "branch"
 ```
+
 > **Astuce** : Ces alias accélèrent votre workflow quotidien !
 
 ### Lister branches, tags, remotes
