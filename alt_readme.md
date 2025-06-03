@@ -20,8 +20,8 @@ Si ce n'est pas le cas, installez-le via [git-scm.com](https://git-scm.com/downl
 Il est indispensable de configurer votre nom et votre adresse email, car ils seront associés à chaque commit :
 
 ```bash
-git config --global user.name "Votre Nom"
-git config --global user.email "votre.email@example.com"
+git config --global user.name "Your_Name"
+git config --global user.email "your.email@example.com"
 ```
 > **Astuce** : Utilisez `--global` pour appliquer la configuration à tous vos dépôts, ou sans `--global` pour ne la définir que dans le projet courant.
 
