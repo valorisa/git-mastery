@@ -4,11 +4,7 @@
 
 Pour s'entraîner efficacement sur la quasi-totalité des commandes Git, il est
 pertinent de structurer un projet pédagogique qui nous fera explorer les
-commandes essentielles, avancées, et même certaines moins courantes.  
-Voici un plan de projet complet, adapté à un environnement macOS  
-(Sequoia, Intel),  
-que l'on pourra réaliser dans le dossier  
-`/Users/<logname>/Projets`.
+commandes essentielles, avancées, et même certaines moins courantes. Voici un plan de projet complet, adapté à un environnement macOS Sequoia (Intel), que l'on pourra réaliser dans le dossier `/Users/<logname>/Projets`.
 
 ---
 
@@ -18,8 +14,8 @@ que l'on pourra réaliser dans le dossier
 - Configurer son identité :
 
   ```bash
-  git config --global user.name "Son Nom"
-  git config --global user.email "Son.email@example.com"
+  git config --global user.name "Your name"
+  git config --global user.email "Your.email@example.com"
   ```
 
 - Créer un nouveau dossier de projet et initialiser un dépôt :
