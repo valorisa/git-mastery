@@ -77,7 +77,11 @@ commandes essentielles, avancées, et même certaines moins courantes. Voici un 
   ```bash
   git rebase feature-x
   ```
-
+- Alternativement :
+  ```bash
+  git checkout feature-x
+  git rebase main
+  ```
 ---
 
 ### **4. Gestion des dépôts distants**
