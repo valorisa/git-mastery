@@ -171,7 +171,7 @@ Le rebase permet de "rejouer" vos commits sur une base plus récente, gardant un
 Créez un dépôt distant (ex : GitHub) et copiez son URL :
 
 ```bash
-git remote add origin https://github.com/votre-utilisateur/git-mastery-training.git
+git remote add origin https://github.com/valorisa/git-mastery-training.git
 ```
 
 > **Conseil** : Utilisez `git remote -v` pour vérifier la configuration.
@@ -203,7 +203,7 @@ git pull
 ### Cloner un dépôt existant
 
 ```bash
-git clone https://github.com/votre-utilisateur/git-mastery-training.git
+git clone https://github.com/valorisa/git-mastery-training.git
 ```
 
 ---
