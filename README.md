@@ -38,14 +38,14 @@ commandes essentielles, avancées, et même certaines moins courantes. Voici un 
   git commit -m "Premier commit avec plusieurs fichiers"
   ```
 
-- Modifier un fichier, vérifie l’état :
+- Modifier un fichier, vérifier l’état :
 
   ```bash
   git status
   git diff
   ```
 
-- Ajouter et committe à nouveau :
+- Ajouter et committer à nouveau :
 
   ```bash
   git add script.py
