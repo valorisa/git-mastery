@@ -1,0 +1,11 @@
+Dans le contexte de ce projet d’entraînement Git, le fichier notes.txt a avant tout un rôle pratique et pédagogique. Il sert à :
+
+Prendre des notes sur les expérimentations Git : on peut y consigner les commandes testées, les résultats obtenus, les problèmes rencontrés et les solutions trouvées. Cela permet de garder une trace de son apprentissage et de ses essais pour y revenir plus tard.
+
+Lister des tâches ou des idées : il est possible et même permis d'y écrire une to-do list liée à son projet, des idées d’améliorations, des fonctionnalités à tester ou des étapes à ne pas oublier.
+
+Documenter le déroulement du projet : ce fichier peut servir de journal de bord, où y expliquer les différentes étapes de son entraînement, les manipulations réalisées, les objectifs atteints, etc.
+
+Tester les commandes Git sur des fichiers texte : notes.txt est un excellent support pour s’exercer à ajouter, modifier, supprimer, déplacer ou ignorer des fichiers avec Git, sans risque pour le reste du projet.
+
+En résumé, dans son projet, notes.txt est un espace libre et flexible pour organiser tes réflexions, suivre sa progression et manipuler un fichier simple dans tous les scénarios Git que l'on souhaite explorer.
