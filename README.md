@@ -1,349 +1,448 @@
-# Git mastery Training
+# Formation Git Mastery : Objectif Maîtrise Complète
 
-## Projet d'entraînement Git : Objectif "Maîtrise complète des commandes"
+Ce projet est un guide d'entraînement approfondi pour maîtriser Git, de ses bases à ses usages avancés. Il vous accompagne pas à pas, en expliquant chaque commande, ses usages, ses pièges, et en fournissant des conseils pratiques pour progresser efficacement.
 
-Pour s'entraîner efficacement sur la quasi-totalité des commandes Git, il est
-pertinent de structurer un projet pédagogique qui nous fera explorer les
-commandes essentielles, avancées, et même certaines moins courantes. Voici un plan de projet complet, adapté à un environnement macOS Sequoia (Intel), que l'on pourra réaliser dans le dossier `/Users/<logname>/Projets`.
+> **Environnement recommandé** : Ce guide a été conçu sur macOS Sequoia (Intel) avec un dossier de travail type `/Users/<logname>/Projets`, mais toutes les commandes Git sont universelles et fonctionnent sur Linux et Windows (via Git Bash ou WSL). Remarque : `<logname>`est une commande Linux/macOS.
 
 ---
 
-### **1. Initialisation et configuration**
+## 🚀 1. Initialisation et Configuration Initiale
 
-- Installer Git si ce n’est pas déjà fait.
-- Configurer son identité :
-
-  ```bash
-  git config --global user.name "Your name"
-  git config --global user.email "Your.email@example.com"
-  ```
-
-- Créer un nouveau dossier de projet et initialiser un dépôt :
-
-  ```bash
-  mkdir git-mastery
-  cd git-mastery
-  git init
-  ```
-
----
-
-### **2. Manipulation de fichiers et commits**
-
-- Créer plusieurs fichiers (ex : `README.md`, `script.py`, `notes.txt`).
-- Ajoutez-les à l’index, puis faites un commit :
-
-  ```bash
-  git add README.md script.py notes.txt
-  git commit -m "Premier commit avec plusieurs fichiers"
-  ```
-
-- Modifier un fichier, vérifier l’état :
-
-  ```bash
-  git status
-  git diff
-  ```
-
-- Ajouter et committer à nouveau :
-
-  ```bash
-  git add script.py
-  git commit -m "Modification du script"
-  ```
-
----
-
-### **3. Gestion des branches**
-
-- Créer et naviguer entre plusieurs branches :
-
-  ```bash
-  git branch feature-x
-  git checkout feature-x
-  # ou, plus moderne :
-  git switch feature-x
-  ```
-
-- Fusionner une branche :
-
-  ```bash
-  git checkout main
-  git merge feature-x
-  ```
-
-- Expérimenter le rebase :
-
-  ```bash
-  git rebase feature-x
-  ```
-
-- Alternativement :
-
-  ```bash
-  git checkout feature-x
-  git rebase main
-  ```
-
----
-
-### **4. Gestion des dépôts distants**
-
-- Simuler un dépôt distant avec un second dossier ou utiliser GitHub/GitLab :
-
-  ```bash
-  git remote add origin 
-  git push -u origin main
-  git pull origin main
-  ```
-
----
-
-### **5. Manipulation avancée**
-
-- Stasher des modifications :
-
-  ```bash
-  git stash
-  git stash list
-  git stash pop
-  ```
-
-- Supprimer des fichiers suivis et non suivis :
-
-  ```bash
-  git rm notes.txt
-  git clean -n
-  git clean -f
-  ```
-
-- Ignorer des fichiers/dossiers (ex : `__pycache__`) :
-  - Ajouter à `.gitignore`, puis vérifier avec `git status`[4].
-
----
-
-### **6. Exploration de l’historique et annulation**
-
-- Explorer l’historique :
-
-  ```bash
-  git log
-  git log --oneline --graph --all
-  ```
-
-- Revenir à un état antérieur :
-
-  ```bash
-  git reset --hard HEAD~1
-  ```
-
-- Annuler des modifications :
-
-  ```bash
-  git checkout -- script.py
-  # ou, plus moderne :
-  git restore script.py
-  ```
-
----
-
-### **7. Commandes diverses et personnalisations**
-
-- Configurer des alias :
-
-  ```bash
-  git config --global alias.lg "log --oneline --graph"
-  ```
-
-- Lister toutes les branches, tags, remotes :
-
-  ```bash
-  git branch -a
-  git tag
-  git remote -v
-  ```
-
-- Utiliser l’aide intégrée :
-
-  ```bash
-  git help 
-  ```
-
----
-
-### **8. Comparaison des différences entre fichiers locaux et fichiers distants**
-
-Pour comparer les différences entre ses fichiers locaux et ceux du dépôt distant (remote) dans Git, il existe plusieurs commandes à sa disposition. Voici les méthodes les plus courantes :
-
----
-
-#### 1. **Mettre à jour les références du dépôt distant**
-
-Avant toute comparaison, commencer toujours par :
+Avant de commencer, assurez-vous que Git est installé :
 
 ```bash
-git fetch
+git --version
 ```
+Si ce n'est pas le cas, installez-le via [git-scm.com](https://git-scm.com/downloads).
 
-Cela synchronise les informations du dépôt distant sans rien modifier dans son répertoire de travail.
+### Configuration de votre identité Git
+
+Il est indispensable de configurer votre nom et votre adresse email, car ils seront associés à chaque commit :
+
+```bash
+git config --global user.name "Your_Name"
+git config --global user.email "your.email@example.com"
+```
+> **Astuce** : Utilisez `--global` pour appliquer la configuration à tous vos dépôts, ou sans `--global` pour ne la définir que dans le projet courant.
+
+### Création de votre projet d'entraînement
+
+Créez un dossier dédié et initialisez un dépôt Git :
+
+```bash
+mkdir git-mastery-training
+cd git-mastery-training
+git init
+```
+Votre "bac à sable" Git est prêt !
 
 ---
 
-#### 2. **Comparer le contenu des fichiers entre local et distant**
+## 🛠️ 2. Manipulations de Base : Fichiers et Commits
 
-Pour voir les différences entre sa branche locale (par exemple `main`) et la branche distante correspondante (`origin/main`) :
+### Création et suivi de fichiers
+
+1. Créez quelques fichiers (par exemple, `README.md`, `script.py`, `notes.txt`) :
+    ```bash
+    touch README.md script.py notes.txt
+    ```
+2. Ajoutez-les à la zone de préparation (index) :
+    ```bash
+    git add README.md script.py notes.txt
+    # Ou pour tous les fichiers : git add .
+    ```
+3. Effectuez votre premier commit :
+    ```bash
+    git commit -m "Premier commit : ajout des fichiers initiaux"
+    ```
+
+> **Conseil** : Commencez toujours par des petits commits atomiques, cela facilitera l’historique et la relecture.
+
+### Modification et consultation
+
+1. Modifiez un fichier (par exemple, `script.py`) avec votre éditeur préféré.
+2. Vérifiez l’état du dépôt :
+    ```bash
+    git status
+    ```
+3. Visualisez les modifications apportées :
+    ```bash
+    git diff
+    ```
+4. Ajoutez et commitez les changements :
+    ```bash
+    git add script.py
+    git commit -m "Modifie script.py : ajout d'une fonction"
+    ```
+
+---
+
+## 🌿 3. Gestion des Branches
+
+Les branches permettent de travailler sur des fonctionnalités ou corrections sans impacter la branche principale.
+
+### Création et navigation
+
+1. Créez une nouvelle branche :
+    ```bash
+    git branch feature-nouvelle-fonctionnalite
+    ```
+2. Basculez dessus :
+    ```bash
+    git checkout feature-nouvelle-fonctionnalite
+    # Ou, plus moderne :
+    git switch feature-nouvelle-fonctionnalite
+    ```
+    > **Astuce** : Créez et basculez en une seule commande :
+    > ```bash
+    > git checkout -b feature-nouvelle-fonctionnalite
+    > # ou
+    > git switch -c feature-nouvelle-fonctionnalite
+    > ```
+
+### Fusion de branches (merge)
+
+1. Faites des commits sur votre branche de fonctionnalité.
+2. Revenez sur la branche principale :
+    ```bash
+    git checkout main
+    # ou git switch main
+    ```
+3. Fusionnez la branche :
+    ```bash
+    git merge feature-nouvelle-fonctionnalite
+    ```
+    > **Conseil** : Résolvez les conflits de fusion si besoin, puis validez la fusion.
+
+### Réécriture de l’historique (rebase)
+
+Le rebase permet de "rejouer" vos commits sur une base plus récente, gardant un historique linéaire.
+
+- **Rebaser votre branche de fonctionnalité sur la branche principale (le plus courant)** :
+    ```bash
+    git checkout feature-nouvelle-fonctionnalite
+    git fetch origin # Pour récupérer les dernières mises à jour distantes
+    git rebase main  # ou git rebase origin/main si vous suivez la version distante
+    ```
+    > **Attention** : Ne faites pas de rebase sur des branches déjà partagées avec d'autres, car cela réécrit l’historique !
+
+- **Rebaser la branche principale sur votre branche de fonctionnalité** (rare, mais illustratif) :
+    ```bash
+    git checkout main
+    git rebase feature-nouvelle-fonctionnalite
+    ```
+
+#### 💡 Différence merge vs rebase
+
+- **merge** : conserve l’historique de branchement (commits parallèles, puis commit de fusion).
+- **rebase** : réécrit l’historique pour donner l’impression d’un développement linéaire.
+
+---
+
+## ☁️ 4. Travailler avec des Dépôts Distants
+
+### Connecter un dépôt local à un dépôt distant
+
+Créez un dépôt distant (ex : GitHub) et copiez son URL :
+```bash
+git remote add origin https://github.com/votre-utilisateur/git-mastery-training.git
+```
+> **Conseil** : Utilisez `git remote -v` pour vérifier la configuration.
+
+### Envoyer vos modifications
+
+- Premier push (avec suivi de branche) :
+    ```bash
+    git push -u origin main
+    ```
+- Pushs suivants :
+    ```bash
+    git push
+    ```
+
+### Récupérer les modifications distantes
 
 ```bash
-git diff main origin/main
+git pull origin main
+# ou simplement
+git pull
+```
+> **Explication** : `git pull` = `git fetch` + `git merge` (ou `git rebase` selon la config).
+
+### Cloner un dépôt existant
+
+```bash
+git clone https://github.com/votre-utilisateur/git-mastery-training.git
 ```
 
-ou, si on est déjà sur la branche concernée :
+---
+
+## ✨ 5. Techniques Avancées et Utilitaires
+
+### Mise de côté temporaire (stash)
+
+Pour sauvegarder des modifications non commitées :
+```bash
+git stash push -m "Travail en cours sur la fonctionnalité Y"
+git stash list
+git stash pop  # Applique et retire le dernier stash
+# git stash apply # Applique sans retirer
+# git stash drop # Supprime un stash spécifique
+```
+> **Astuce** : Utilisez le stash pour changer rapidement de branche sans perdre votre travail en cours.
+
+### Suppression de fichiers
+
+- **Supprimer un fichier suivi par Git et du système de fichiers** :
+    ```bash
+    git rm notes.txt
+    git commit -m "Supprime notes.txt"
+    ```
+- **Supprimer des fichiers non suivis (dangereux)** :
+    ```bash
+    git clean -n   # Simulation
+    git clean -f   # Suppression effective
+    git clean -fd  # Supprime aussi les dossiers non suivis
+    ```
+
+### Ignorer des fichiers avec `.gitignore`
+
+1. Créez un fichier `.gitignore` à la racine.
+2. Ajoutez-y les motifs à ignorer :
+    ```
+    # Fichiers Python compilés
+    __pycache__/
+    *.pyc
+
+    # Dépendances Node.js
+    node_modules/
+
+    # Fichiers de log
+    *.log
+    ```
+3. Ajoutez et commitez le `.gitignore` :
+    ```bash
+    git add .gitignore
+    git commit -m "Ajoute .gitignore"
+    git status
+    ```
+
+> **Conseil** : Un bon `.gitignore` protège votre dépôt des fichiers inutiles ou sensibles.
+
+---
+
+## 📜 6. Explorer l'Historique et Annuler des Modifications
+
+### Visualisation de l’historique
+
+```bash
+git log
+git log --oneline
+git log --graph --oneline --all --decorate
+```
+> **Astuce** : Utilisez `q` pour quitter la vue log.
+
+### Revenir à un état antérieur
+
+- **Annuler le dernier commit et supprimer les modifications du répertoire de travail** :
+    ```bash
+    git reset --hard HEAD~1
+    ```
+- **Annuler le dernier commit mais garder les modifications en staging** :
+    ```bash
+    git reset --soft HEAD~1
+    ```
+- **Annuler le dernier commit mais garder les modifications dans le répertoire de travail** :
+    ```bash
+    git reset --mixed HEAD~1
+    ```
+
+> **Attention** : `--hard` efface définitivement les modifications non sauvegardées !
+
+### Annuler des modifications non commitées
+
+- **Restaurer un fichier à sa version du dernier commit** :
+    ```bash
+    git restore nom_du_fichier.txt
+    # Ancienne méthode :
+    git checkout -- nom_du_fichier.txt
+    ```
+- **Retirer un fichier de la zone de préparation (index)** :
+    ```bash
+    git restore --staged nom_du_fichier.txt
+    # Ancienne méthode :
+    git reset HEAD nom_du_fichier.txt
+    ```
+
+### Annuler un commit publié (méthode sûre)
+
+Pour annuler un commit déjà poussé :
+```bash
+git revert 
+```
+> **Explication** : `git revert` crée un nouveau commit qui annule les changements, sans réécrire l’historique partagé.
+
+### Récupérer des commits perdus
+
+Utilisez le reflog pour retrouver des commits supprimés par erreur :
+```bash
+git reflog
+# Puis, pour revenir à un état précédent :
+git reset --hard 
+```
+
+---
+
+## 🔬 7. Comparaison Détaillée : Local vs Distant
+
+### Mettre à jour les références distantes
+
+```bash
+git fetch origin
+```
+
+### Comparer le contenu des fichiers
 
 ```bash
 git diff origin/main
 ```
 
-Cela affiche les différences ligne par ligne entre la version locale et la version distante.
-
----
-
-#### 3. **Lister uniquement les fichiers modifiés**
-
-Pour obtenir la liste des fichiers qui diffèrent (ajoutés, modifiés, supprimés) :
-
-```bash
-git diff --name-status main origin/main
-```
-
-ou, pour la branche courante :
+### Lister les fichiers différents
 
 ```bash
 git diff --name-status origin/main
 ```
 
----
-
-#### 4. **Comparer un fichier spécifique**
-
-Pour comparer un fichier précis entre local et distant :
+### Comparer un fichier précis
 
 ```bash
-git diff main..origin/main -- chemin/vers/fichier
+git diff origin/main -- chemin/vers/fichier.txt
 ```
 
----
-
-#### 5. **Comparer les commits (et non le contenu des fichiers)**
-
-Pour voir quels commits sont présents sur le remote mais pas en local :
+### Voir les commits présents sur le distant mais pas en local
 
 ```bash
 git log main..origin/main --oneline
 ```
 
----
+### Voir les commits locaux non poussés
 
-#### 6. **Vérifier si l'on est en avance ou en retard**
+```bash
+git log origin/main..main --oneline
+```
+
+### Vérifier l’avance/retard de la branche
 
 ```bash
 git status
 ```
 
-nous dira si la branche locale est « ahead » (en avance) ou « behind » (en retard) par rapport à la branche distante, mais n’affichera pas le détail des différences.
+#### Tableau récapitulatif
+
+| Action                                 | Commande                                        |
+| :------------------------------------- | :---------------------------------------------- |
+| Mettre à jour les infos du distant     | `git fetch origin`                              |
+| Diff de contenu (local vs distant)     | `git diff origin/main`                          |
+| Liste des fichiers modifiés            | `git diff --name-status origin/main`            |
+| Diff d’un fichier précis               | `git diff origin/main -- chemin/vers/fichier`   |
+| Commits distants non présents en local | `git log main..origin/main --oneline`           |
+| Commits locaux non poussés             | `git log origin/main..main --oneline`           |
+| Vérifier l’avance/retard               | `git status`                                    |
 
 ---
 
-### **Résumé des commandes clés**
+## ⚙️ 8. Commandes Diverses et Personnalisations
 
-| Action                                  | Commande                                       |
-|------------------------------------------|------------------------------------------------|
-| Diff entre local et distant (contenu)    | `git diff origin/main`                         |
-| Liste des fichiers modifiés              | `git diff --name-status origin/main`           |
-| Diff d’un fichier précis                 | `git diff origin/main -- chemin/vers/fichier`  |
-| Voir les nouveaux commits distants       | `git log main..origin/main --oneline`          |
-| Vérifier l’avance/retard                 | `git status`                                   |
+### Configurer des alias utiles
 
----
+```bash
+git config --global alias.lg "log --oneline --graph --all --decorate"
+git config --global alias.st "status"
+git config --global alias.co "checkout"
+git config --global alias.br "branch"
+```
+> **Astuce** : Ces alias accélèrent votre workflow quotidien !
 
-**En résumé** :  
-Utilise principalement `git fetch` puis `git diff origin/` pour voir les différences de contenu entre ta branche locale et la branche distante, ou `git log` pour comparer les commits.
+### Lister branches, tags, remotes
 
-[1] https://stackoverflow.com/questions/1800783/how-to-compare-a-local-git-branch-with-its-remote-branch
-[2] https://corner.buka.sh/how-to-check-for-remote-git-changes-without-pulling/
-[3] https://graphite.dev/guides/git-diff-local-remote
-[4] https://github.com/git-guides/git-status
-[5] https://betterstack.com/community/questions/how-to-compare-local-branch-with-remote/
-[6] https://graphite.dev/guides/how-to-compare-a-local-branch-to-a-remote-branch-in-git
-[7] https://oozou.com/til/diff-a-local-file-with-remote-version-in-git-35
-[8] https://www.reddit.com/r/AskProgramming/comments/s8gkja/is_there_a_way_to_get_git_to_show_me_the/
-[9] https://labex.io/tutorials/git-how-to-compare-local-and-remote-repository-changes-after-git-fetch-417571
-[10] https://intellij-support.jetbrains.com/hc/en-us/community/posts/207112575-How-do-I-compare-my-local-git-repository-to-remote
+```bash
+git branch       # Branches locales
+git branch -r    # Branches distantes
+git branch -a    # Toutes les branches
+git tag          # Tous les tags
+git remote -v    # Voir les dépôts distants
+```
 
-## **Liste non exhaustive des commandes à pratiquer**
+### Utiliser l’aide intégrée
 
-| Commande              | Description                                      |
-|-----------------------|--------------------------------------------------|
-| git init              | Initialiser un dépôt                             |
-| git clone             | Cloner un dépôt distant                          |
-| git status            | État du dépôt                                    |
-| git add               | Ajouter à l’index                                |
-| git commit            | Créer un commit                                  |
-| git log               | Historique des commits                           |
-| git diff              | Voir les différences                             |
-| git branch            | Gérer les branches                               |
-| git checkout/switch   | Changer de branche/restaurer un fichier          |
-| git merge             | Fusionner des branches                           |
-| git rebase            | Rejouer des commits                              |
-| git remote            | Gérer les dépôts distants                        |
-| git pull              | Récupérer et fusionner du distant                |
-| git push              | Envoyer au distant                               |
-| git stash             | Mettre de côté des modifications                 |
-| git rm                | Supprimer des fichiers suivis                    |
-| git clean             | Supprimer des fichiers non suivis                |
-| git tag               | Gérer les tags                                   |
-| git reset             | Réinitialiser HEAD ou l’index                    |
-| git revert            | Annuler un commit en créant un commit inverse    |
-| git config            | Configurer Git                                   |
-| git show              | Afficher des objets Git (commit, tag, etc.)      |
-| git blame             | Voir qui a modifié chaque ligne                  |
-| git cherry-pick       | Appliquer un commit précis sur une autre branche |
-
-[1](https://www.hostinger.com/fr/tutoriels/commandes-git)
-[2](https://www.datacamp.com/fr/blog/git-commands)
-[5](https://www.datacamp.com/fr/tutorial/github-and-git-tutorial-for-beginners)
+```bash
+git help 
+# Exemples :
+git help log
+git help commit
+git help rebase
+```
 
 ---
 
-## **Conseils pour aller plus loin**
+## 📋 9. Liste Récapitulative des Commandes à Pratiquer
 
-- Documenter chaque étape dans un fichier `JOURNAL.md`.
-- Utiliser des erreurs volontaires (commits à annuler, conflits à résoudre).
-- Tester les commandes de récupération (`git reflog`, `git fsck`, etc.).
-- Explorer la personnalisation via `git config` (alias, couleurs, éditeur par défaut...).
+| Commande          | Description                                               |
+| :---------------- | :------------------------------------------------------- |
+| `git init`        | Initialiser un dépôt Git local                           |
+| `git clone`       | Cloner un dépôt distant existant                         |
+| `git config`      | Configurer les options Git (utilisateur, alias, etc.)    |
+| `git status`      | Afficher l'état des fichiers du répertoire de travail    |
+| `git add`         | Ajouter des modifications à l'index (staging)            |
+| `git commit`      | Enregistrer les modifications dans l'historique          |
+| `git log`         | Afficher l'historique des commits                        |
+| `git diff`        | Afficher les différences entre commits, branches, fichiers|
+| `git branch`      | Lister, créer ou supprimer des branches                  |
+| `git checkout`    | Changer de branche ou restaurer des fichiers             |
+| `git switch`      | (Moderne) Changer de branche                             |
+| `git restore`     | (Moderne) Restaurer des fichiers / annuler des indexations|
+| `git merge`       | Fusionner des branches                                   |
+| `git rebase`      | Réappliquer des commits sur une autre base               |
+| `git remote`      | Gérer les dépôts distants                                |
+| `git fetch`       | Télécharger les objets et références d'un dépôt distant  |
+| `git pull`        | `fetch` suivi d'un `merge` (ou `rebase`)                 |
+| `git push`        | Envoyer les commits locaux vers un dépôt distant         |
+| `git stash`       | Mettre de côté temporairement des modifications locales  |
+| `git rm`          | Supprimer des fichiers de l'index et du répertoire       |
+| `git clean`       | Supprimer les fichiers non suivis du répertoire          |
+| `git tag`         | Marquer des commits avec des étiquettes                  |
+| `git reset`       | Annuler des commits ou des indexations (attention)       |
+| `git revert`      | Créer un commit qui annule un commit précédent           |
+| `git show`        | Afficher divers objets Git (commits, tags, etc.)         |
+| `git blame`       | Afficher qui a modifié chaque ligne d'un fichier         |
+| `git cherry-pick` | Appliquer un commit spécifique sur la branche courante   |
+| `git reflog`      | Afficher le journal des références (récupération)        |
 
 ---
 
-## **Ressources complémentaires**
+## 💡 10. Conseils pour Approfondir
 
-- [Hostinger - Commandes Git][https://www.hostinger.com/fr/tutoriels/commandes-git](1)
-- [DataCamp - Guide pratique Git][https://www.datacamp.com/fr/blog/git-commands](2)
-- [Exercices guidés Git][https://supports.uptime-formation.fr/02-git-et-gitlab/git_1_exo/](4)
+- **Tenez un journal** : Notez vos commandes, essais, erreurs et découvertes dans un fichier `JOURNAL.md`.
+- **Expérimentez avec les erreurs** : Provoquez des conflits, annulez des commits, récupérez des états antérieurs pour comprendre comment Git fonctionne en profondeur.
+- **Explorez la récupération** : Utilisez `git reflog` pour retrouver des commits supprimés ou perdus.
+- **Personnalisez Git** : Testez différentes options de `git config` (éditeur par défaut, couleurs, comportement de pull, etc.).
+- **Essayez les hooks Git** : Automatisez des actions (tests, formatage) avant ou après certains événements Git (voir `.git/hooks`).
 
 ---
 
-On peut ainsi se créer un "bac à sable" Git où l'on s'autorise toutes les
-manipulations, y compris celles qui "cassent" l'historique, afin de comprendre
-l'effet de chaque commande. En suivant ce plan, on pratiquera la quasi-totalité
-des commandes Git utiles dans la vie réelle et on pourra compléter avec la
-documentation officielle ou l'aide intégrée pour les commandes plus rares.
+## 📚 11. Ressources Complémentaires
 
-[1] https://www.hostinger.com/fr/tutoriels/commandes-git
-[2] https://www.datacamp.com/fr/blog/git-commands
-[3] https://talks.freelancerepublik.com/git-commandes-indispensables-developpeurs/
-[4] https://supports.uptime-formation.fr/02-git-et-gitlab/git_1_exo/
-[5] https://www.datacamp.com/fr/tutorial/github-and-git-tutorial-for-beginners
-[6] https://blog.stephane-robert.info/docs/developper/version/git/
-[7] https://training.github.com/downloads/fr/github-git-cheat-sheet.pdf
-[8] https://www.macg.co/logiciels/2018/04/decouvrez-et-apprenez-git-avec-ce-nouveau-tutoriel-video-102093?page=1
-[9] https://www.atlassian.com/fr/git/tutorials/install-git
-[10] https://gist.github.com/dgageot/656299
+- [Documentation officielle de Git](https://git-scm.com/doc)
+- [Pro Git Book (français)](https://git-scm.com/book/fr/v2)
+- [Learn Git Branching (français)](https://learngitbranching.js.org/?locale=fr_FR)
+- [Atlassian Git Tutorials](https://www.atlassian.com/fr/git/tutorials)
+- [GitHub Skills](https://skills.github.com/)
+- [Hostinger - Commandes Git](https://www.hostinger.fr/tutoriels/commandes-git)
+- [DataCamp - Guide Pratique Git](https://www.datacamp.com/fr/blog/git-commands)
+- [Feuille de triche GitHub (PDF)](https://training.github.com/downloads/fr/github-git-cheat-sheet.pdf)
+
+---
+
+**Ce projet est votre laboratoire. Expérimentez sans crainte, testez toutes les commandes, et amusez-vous à explorer les possibilités de Git. C’est en pratiquant que vous deviendrez un expert !**
+
+---
