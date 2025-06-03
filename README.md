@@ -31,7 +31,7 @@ commandes essentielles, avancées, et même certaines moins courantes. Voici un 
 ### **2. Manipulation de fichiers et commits**
 
 - Créer plusieurs fichiers (ex : `README.md`, `script.py`, `notes.txt`).
-- Ajouter-les à l’index, puis faites un commit :
+- Ajoutez-les à l’index, puis faites un commit :
 
   ```bash
   git add README.md script.py notes.txt
