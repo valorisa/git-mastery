@@ -2,7 +2,7 @@
 
 Ce projet est un guide d'entraînement approfondi pour maîtriser Git, de ses bases à ses usages avancés. Il vous accompagne pas à pas, en expliquant chaque commande, ses usages, ses pièges, et en fournissant des conseils pratiques pour progresser efficacement.
 
-> **Environnement recommandé** : Ce guide a été conçu sur macOS Sequoia (Intel) avec un dossier de travail type `/Users/<logname>Projets`, mais toutes les commandes Git sont universelles et fonctionnent sur Linux et Windows (via Git Bash ou WSL).
+> **Environnement recommandé** : Ce guide a été conçu sur macOS Sequoia (Intel) avec un dossier de travail type `/Users/<logname>/Projets`, mais toutes les commandes Git sont universelles et fonctionnent sur Linux et Windows (via Git Bash ou WSL). Remarque : `<logname>`est une commande Linux/macOS.
 
 ---
 
